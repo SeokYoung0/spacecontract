@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">spacecontract</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Naver Login API DATA  -->
+    <string name="naver_client_id">O5IcV5Mp_Ddune_zwIVj</string>
+    <string name="naver_client_secret">wnbBV4LCeL</string>
+    <string name="naver_client_name">SpaceContract</string>
+</resources>

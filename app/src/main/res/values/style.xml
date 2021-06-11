@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="menubuttonstyle" parent="@style/Widget.AppCompat.Button">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:drawableTint">@color/black</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:background">@drawable/buttonclickeffect</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="betweenbuttonlinestyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2px</item>
+        <item name="android:background">#A4DCDCDC</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+
+</resources>
