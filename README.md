@@ -53,6 +53,7 @@
 - AccountSettingFragment에서 MenuFragment로 돌아올시 버그가 있음
 - 되돌아오도로혹 하는 replaceFragment()메소드를 연속으로 2번 호출해야 /n Fragment 전환이 이루어짐
 - 원인 못 찾음 :(
+- Check
    
 
     
