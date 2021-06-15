@@ -6,22 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.nhn.android.naverlogin.OAuthLogin;
-import com.spaceplanning.app.spacecontract.AccountSettingFragment;
 import com.spaceplanning.app.spacecontract.LoginActivity;
-import com.spaceplanning.app.spacecontract.MainActivity;
 import com.spaceplanning.app.spacecontract.R;
 
 public class MenuFragment extends Fragment {
@@ -56,6 +53,9 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mOAuthLoginModule.logout(mContext);
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
+                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+                googleSignInClient.signOut();
                 Toast.makeText(getActivity(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);

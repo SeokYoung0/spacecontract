@@ -1,11 +1,11 @@
 package com.spaceplanning.app.spacecontract;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,6 +18,7 @@ import com.spaceplanning.app.spacecontract.BottomNaviFragment.ConsultingFragment
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.HomeFragment;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.IOnClickMenuButtonListener;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.MenuFragment;
+import com.spaceplanning.app.spacecontract.BottomNaviFragment.MenuFragmentList.AccountSettingFragment;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.NoticeFragment;
 
 public class MainActivity extends AppCompatActivity implements IOnClickMenuButtonListener {
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         replaceFragment(fragment_home, "home");
 
         bottomNavigationClick();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     // BottomNavigation 클릭 시 동작
