@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragmentInList.GetFileActivity">
+    tools:context=".HomeFragmentInList.GetFileActivity"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_fileget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="여기를 눌러봐유"/>
+
+    <TextView
+        android:id="@+id/tv_fileset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="어쩔랑가 몰라"
+        />
 
 
 

@@ -6,18 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".BottomNaviFragment.HomeFragment">
 
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_gocontract"
         android:layout_width="170dp"
         android:layout_height="200dp"
         android:layout_marginLeft="20dp"
         android:layout_gravity="top|left">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_baseline_picture_as_pdf_24"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="left"
+            app:tint="@color/space_color" />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:text="계약하러가기 →"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#B6B6B6"
+            android:layout_gravity="center_vertical"
+            android:text="계약할 문서를 보여줍니다.">
+
+        </TextView>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
