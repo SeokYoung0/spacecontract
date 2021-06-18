@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.ConsultingFragment;
@@ -84,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                 setCurrentIndicator(position);
             }
         });
-
         setupIndicators(images.length);
 
         // 계약서 작성법 버튼 및 계약하기 버튼
@@ -105,31 +101,23 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                     case R.id.home:
                         replaceFragment(fragment_home, "home");
                         toolbarSetting("Space 계약", View.VISIBLE);
-                        sliderViewPager.setVisibility(View.VISIBLE);
-                        layoutIndicator.setVisibility(View.VISIBLE);
-                        viewFadingEdge.setVisibility(View.VISIBLE);
+                        viewPagerItemVisibility(View.VISIBLE);
                         break;
                     case R.id.consulting:
 
                         replaceFragment(fragment_consulting, "consulting");
                         toolbarSetting("상담", View.GONE);
-                        sliderViewPager.setVisibility(View.GONE);
-                        layoutIndicator.setVisibility(View.GONE);
-                        viewFadingEdge.setVisibility(View.GONE);
+                        viewPagerItemVisibility(View.GONE);
                         break;
                     case R.id.menu:
                         replaceFragment(fragment_menu, "menu");
                         toolbarSetting("메뉴", View.GONE);
-                        sliderViewPager.setVisibility(View.GONE);
-                        layoutIndicator.setVisibility(View.GONE);
-                        viewFadingEdge.setVisibility(View.GONE);
+                        viewPagerItemVisibility(View.GONE);
                         break;
                     case R.id.notice:
                         replaceFragment(fragment_notice, "notice");
                         toolbarSetting("알림", View.GONE);
-                        sliderViewPager.setVisibility(View.GONE);
-                        layoutIndicator.setVisibility(View.GONE);
-                        viewFadingEdge.setVisibility(View.GONE);
+                        viewPagerItemVisibility(View.GONE);
                         break;
                 }
                 return true;
@@ -137,11 +125,27 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         });
     }
 
+
+    // Fragment별 이동
+    public void replaceFragment(Fragment fragment, String tag) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_layout, fragment, tag)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
     // 상단 toolbar 설정 변경
     private void toolbarSetting(String 상담, int gone) {
         textview_title.setText(상담);
         iv_logo.setVisibility(gone);
     }
+    // 프래그먼트 변경시 viewpager 화면 표시 여부 
+    private void viewPagerItemVisibility(int visible) {
+        sliderViewPager.setVisibility(visible);
+        layoutIndicator.setVisibility(visible);
+        viewFadingEdge.setVisibility(visible);
+    }
+
 
     // 뒤로가기 버튼 클릭시 HomeFragment로 돌아옴
     @Override
@@ -200,15 +204,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             default:
                 break;
         }
-    }
-
-    // Fragment별 이동
-    public void replaceFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_layout, fragment, tag)
-                .addToBackStack(null)
-                .commitAllowingStateLoss();
     }
 
 
