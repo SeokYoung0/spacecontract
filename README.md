@@ -25,21 +25,39 @@
 
 - 2. Fragment
     - Home
+        - fragment_how_to_use(가)
+        - fragment_write_contract(가제)
+        
     - Menu
+        - fragment_account_setting
+        
     - Consulting
+    
     - Notice
-    - AccountSetting
-
+   
 ## 3. 기능
     
 - 1. MainActivity
     - BottumNav 기능 구현
     - Home, Consulting, Notice, Menu 순으로 제공
-    - MenuFragment에서 여러 항목 중 계정 정보(AccountSetting)이동 가능
+    - MenuFragment에서 여러 항목 중 계정 정보(AccountSetting)이동 가능제
+    - 화면 구성도 변
     
 - 2. LoginActivity
    - Google, Naver, Kakao Login 기능 구축 예정
-   - 현재 Naver 기능 구현 중, 로그인/로그아웃 동작 확인
+   - Naver/Google 로그 기능 구현 완료, Logcat을 통한 response값 확인 
+  
+- 3. IntroActivity
+    - 앱 실행 시 intro화면이 나오는 기능 구현
+    - 1500ms 동안 화면에 출력
+    
+- 4. MenuFragment
+    - MenuFragment에서 fragment_account_setting으로 이동 가능
+    - 지난 번(다시 MenuFragment)로 돌아오지 못하는 버그 해결
+    
+- 5. HomeFragment
+    - 계약서 작성법 fragment & 계약서 작성 fragment로 변경될 수 있도록 설계 중...
+    - 현재 각각 카드 뷰 클릭시 해당 fragment위치를 설정하기 위해 임시 이벤트리스너를 등록
    
 ## 4. 추가
 
@@ -50,10 +68,9 @@
     - 3. 계약서 작성 후 검토는 유료화(결제 시스템 필요)
    
 ## 5. 버그
-- AccountSettingFragment에서 MenuFragment로 돌아올시 버그가 있음
-- 되돌아오도로혹 하는 replaceFragment()메소드를 연속으로 2번 호출해야 /n Fragment 전환이 이루어짐
-- 원인 못 찾음 :(
-- Check
+
+- 2021.06.18 해결 :D
+    1. AccountSettingFragment에서 MenuFragment로 돌아올시 버그가 있음 
    
 
     
