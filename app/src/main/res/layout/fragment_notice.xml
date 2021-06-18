@@ -8,6 +8,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="여기는 알림 프레그먼트 화면" />
+        android:text="알림 개발 중..."
+        android:textSize="24dp"
+        android:gravity="center"/>
 
 </FrameLayout>

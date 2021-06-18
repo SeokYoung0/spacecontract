@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.ConsultingFragment;
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         layoutIndicator = findViewById(R.id.layoutIndicators);
         viewFadingEdge = findViewById(R.id.viewFadingEdge);
 
+        viewFadingEdge.setVisibility(View.GONE);
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
 
@@ -84,10 +87,9 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
 
         setupIndicators(images.length);
 
+        // 계약서 작성법 버튼 및 계약하기 버튼
 
         bottomNavigationClick();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
     }
 
     // BottomNavigation 클릭 시 동작
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                         viewFadingEdge.setVisibility(View.VISIBLE);
                         break;
                     case R.id.consulting:
+
                         replaceFragment(fragment_consulting, "consulting");
                         toolbarSetting("상담", View.GONE);
                         sliderViewPager.setVisibility(View.GONE);
@@ -143,36 +146,37 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     // 뒤로가기 버튼 클릭시 HomeFragment로 돌아옴
     @Override
     public void onBackPressed() {
+//        super.onBackPressed();
+
         if (isBackHome()) {
             onBackHome();
         } else {
             onBackMenu();
         }
-        super.onBackPressed();
     }
 
     private void onBackMenu() {
-        replaceFragment(fragment_menu, "menu", "이해불가");
-//        replaceFragment(fragment_menu, "menu");
-//        replaceFragment(fragment_menu, "menu");
+        replaceFragment(fragment_menu, "menu");
     }
 
     private boolean isBackHome() {
-        String[] tags = {"home", "menu", "consulting", "notice"};
+        String[] tags = {"home","menu","consulting", "notice"};
         String temp = null;
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
 
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            Log.d("MainActivity", String.valueOf(fragment));
             if (fragment.isVisible()) {
                 for (int i = 0; i < tags.length; i++) {
                     if (fragment instanceof HomeFragment)
-                        temp = "Home";
-                    if (fragment instanceof MenuFragment)
-                        temp = "Menu";
-                    if (fragment instanceof ConsultingFragment)
-                        temp = "Consulting";
-                    if (fragment instanceof NoticeFragment)
-                        temp = "Notice";
+                        temp = tags[i];
+                    else if (fragment instanceof MenuFragment)
+                        temp = tags[i];
+                    else if (fragment instanceof ConsultingFragment)
+                        temp = tags[i];
+                    else if (fragment instanceof NoticeFragment)
+                        temp = tags[i];
                 }
+                break;
             }
         }
 
@@ -183,15 +187,12 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         switch (mBottomNavigationView.getSelectedItemId()) {
             case R.id.menu:
                 mBottomNavigationView.setSelectedItemId(R.id.home);
-                replaceFragment(fragment_home, "home");
                 break;
             case R.id.notice:
                 mBottomNavigationView.setSelectedItemId(R.id.home);
-                replaceFragment(fragment_home, "home");
                 break;
             case R.id.consulting:
                 mBottomNavigationView.setSelectedItemId(R.id.home);
-                replaceFragment(fragment_home, "home");
                 break;
             case R.id.home:
                 finish();
@@ -207,17 +208,9 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                 .beginTransaction()
                 .replace(R.id.main_layout, fragment, tag)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
 
-    public void replaceFragment(Fragment fragment, String tag, String daf) {
-        Log.d("tag", "1");
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_layout, fragment, tag)
-                .addToBackStack(null)
-                .commit();
-    }
 
     @Override
     public void onMenuButtonSelected(String ButtonId) {

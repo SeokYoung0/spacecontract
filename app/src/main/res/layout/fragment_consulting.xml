@@ -8,6 +8,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="여기는 상담 프레그먼트 화면" />
+        android:text="상담 개발 중..."
+        android:gravity="center"
+        android:textSize="24dp"/>
 
 </FrameLayout>
