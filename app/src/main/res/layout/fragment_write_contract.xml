@@ -3,13 +3,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="계악서 작성 개발 중..."
-        android:textSize="24dp"
-        android:layout_gravity="center">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    </TextView>
+        >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:text="계악서 작성 개발 중..."
+               android:textSize="24dp"
+               android:layout_margin="24dp"
+               android:layout_gravity="center">
+           </TextView>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="계악서 작성 개발 중..."
+               android:textSize="24dp"
+               android:layout_margin="24dp"
+               android:layout_gravity="center">
+           </TextView>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="계악서 작성 개발 중..."
+               android:textSize="24dp"
+               android:layout_margin="24dp"
+               android:layout_gravity="center">
+           </TextView>
+
+           <LinearLayout
+               android:id="@+id/upload_file_1"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp">
+               <EditText
+                   android:id="@+id/upload_file_name_1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:hint="hello"
+                   android:focusable="false"
+                   android:clickable="false"
+                   android:layout_weight="9">
+               </EditText>
+               <Button
+                   android:id="@+id/upload_file_btn_1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="파일 첨부 "
+                   android:layout_weight="1"></Button>
+           </LinearLayout>
+           <LinearLayout
+               android:id="@+id/upload_file_2"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp">
+               <EditText
+                   android:id="@+id/upload_file_name_2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:hint="hello"
+                   android:focusable="false"
+                   android:clickable="false"
+                   android:layout_weight="9">
+               </EditText>
+               <Button
+                   android:id="@+id/upload_file_btn_2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="파일 첨부 "
+                   android:layout_weight="1"></Button>
+           </LinearLayout>
+           <LinearLayout
+               android:id="@+id/upload_file_3"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp">
+               <EditText
+                   android:id="@+id/upload_file_name_3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:hint="hello"
+                   android:focusable="false"
+                   android:clickable="false"
+                   android:layout_weight="9">
+               </EditText>
+               <Button
+                   android:id="@+id/upload_file_btn_3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="파일 첨부 "
+                   android:layout_weight="1"></Button>
+           </LinearLayout>
+       </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

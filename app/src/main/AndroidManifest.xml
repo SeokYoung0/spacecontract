@@ -17,8 +17,10 @@
         android:theme="@style/Theme.Spacecontract"
         android:usesCleartextTraffic="true">
         <activity android:name=".HomeFragmentInList.ContractWriteActivity"></activity>
-        <activity android:name=".HomeFragmentInList.GetFileActivity"></activity>
+        <activity android:name=".HomeFragmentInList.GetFileActivity">
+        </activity>
         <activity android:name=".LoginActivity" />
+
         <activity
             android:name=".IntroActivity"
             android:theme="@style/FullScreenTheme">

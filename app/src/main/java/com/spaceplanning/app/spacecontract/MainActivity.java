@@ -1,13 +1,19 @@
 package com.spaceplanning.app.spacecontract;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             }
         });
         setupIndicators(images.length);
-
         // 계약서 작성법 버튼 및 계약하기 버튼
 
         bottomNavigationClick();
@@ -147,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         iv_logo.setVisibility(gone);
     }
     // 프래그먼트 변경시 viewpager 화면 표시 여부 
-    private void viewPagerItemVisibility(int visible) {
+    public void viewPagerItemVisibility(int visible) {
         sliderViewPager.setVisibility(visible);
         layoutIndicator.setVisibility(visible);
         viewFadingEdge.setVisibility(visible);
@@ -279,5 +284,30 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                 ));
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        checkRequestCode(requestCode, resultCode, data);
+    }
+
+    private void checkRequestCode(int requestCode, int resultCode, @org.jetbrains.annotations.Nullable Intent data) {
+        int IMG_FROM_WRITE_CONTRACT_FRAGMENT = 1;
+        int HWP_FROM_WRITE_CONTRACT_FRAGMENT = 2;
+        int PDF_FROM_WRITE_CONTRACT_FRAGMENT = 3;
+
+        if(requestCode == PDF_FROM_WRITE_CONTRACT_FRAGMENT) {
+            fragmentOnActivityResult(requestCode, resultCode, data);
+        } else if(requestCode == HWP_FROM_WRITE_CONTRACT_FRAGMENT) {
+            fragmentOnActivityResult(requestCode, resultCode, data);
+        } else if(requestCode == IMG_FROM_WRITE_CONTRACT_FRAGMENT) {
+            fragmentOnActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void fragmentOnActivityResult(int requestCode, int resultCode, @org.jetbrains.annotations.Nullable @Nullable Intent data) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("write contract");
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 }

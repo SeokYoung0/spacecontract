@@ -68,7 +68,7 @@ public class GetFileActivity extends AppCompatActivity {
             if (resultData != null) {
                 uri = resultData.getData();
                 tv_fileset.setText(uri.toString());
-                File file = new File("content:/com.google.android.apps.docs.storage/document/acc%3D1%3Bdoc%3Dencoded%3DJaPuce2t5148YDHofN0s1Lm%2FUxBU%2Bp2byAszKoA0H2DGq8d5g%2F34oC8%3D.pdf");
+                File file = new File("com.google.android.apps.docs.storage/document/acc%3D1%3Bdoc%3Dencoded%3DJaPuce2t5148YDHofN0s1Lm%2FUxBU%2Bp2byAszKoA0H2DGq8d5g%2F34oC8%3D.pdf");
                 RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
                 Call<Result> resultCall =service.uploadImage(body);

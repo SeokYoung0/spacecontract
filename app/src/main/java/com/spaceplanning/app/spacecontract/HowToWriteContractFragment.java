@@ -21,6 +21,9 @@ public class HowToWriteContractFragment extends Fragment {
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        ((MainActivity)getActivity()).viewPagerItemVisibility(View.GONE);
+        View view = inflater.inflate(R.layout.fragment_write_contract, container, false);
+        return view;
+
     }
 }

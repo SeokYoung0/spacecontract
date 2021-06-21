@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.spaceplanning.app.spacecontract.HowToWriteContractFragment;
 import com.spaceplanning.app.spacecontract.MainActivity;
 import com.spaceplanning.app.spacecontract.R;
 import com.spaceplanning.app.spacecontract.WriteContractFragment;
@@ -37,23 +38,26 @@ public class HomeFragment extends Fragment {
         cv_how_to_use_contract = (CardView) view.findViewById(R.id.cv_how_to_use_contract);
         cv_gocontract.setOnClickListener(homeItemClickEvent());
         cv_how_to_use_contract.setOnClickListener(homeItemClickEvent());
+
+        ((MainActivity)getActivity()).viewPagerItemVisibility(View.VISIBLE);
+
         return view;
     }
 
     @NotNull
     private View.OnClickListener homeItemClickEvent() {
         Fragment fragment_write_contract = new WriteContractFragment();
+        Fragment fragment_how_to_write_contract = new HowToWriteContractFragment();
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.cv_gocontract:
-                        Toast.makeText(getContext(), "계약서 작성", Toast.LENGTH_SHORT).show();
-                        ((MainActivity)getActivity()).replaceFragment(fragment_write_contract, "write_contract");
+                        ((MainActivity)getActivity()).replaceFragment(fragment_write_contract, "write contract");
 
                         break;
                     case R.id.cv_how_to_use_contract:
-                        Toast.makeText(getContext(), "계약서 작성법", Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).replaceFragment(fragment_how_to_write_contract, "how to write contract");
                         break;
                 }
             }
