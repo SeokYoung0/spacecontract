@@ -134,6 +134,13 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
     }
+    public void addFragment(Fragment fragment, String tag) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.main_layout, fragment, tag)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
     // 상단 toolbar 설정 변경
     private void toolbarSetting(String 상담, int gone) {
         textview_title.setText(상담);
@@ -151,12 +158,17 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-
         if (isBackHome()) {
             onBackHome();
+        } else if(isContractFragments()) {
+            onBackHomeFromContractPages();
         } else {
             onBackMenu();
         }
+    }
+
+    private void onBackHomeFromContractPages() {
+        replaceFragment(fragment_home,"home");
     }
 
     private void onBackMenu() {
@@ -184,6 +196,24 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             }
         }
 
+        return temp != null ? true : false;
+    }
+    private boolean isContractFragments() {
+        String[] tags = {"write contract","how to write contract"};
+        String temp = null;
+
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            Log.d("MainActivity", String.valueOf(fragment));
+            if (fragment.isVisible()) {
+                for (int i = 0; i < tags.length; i++) {
+                    if (fragment instanceof WriteContractFragment)
+                        temp = tags[i];
+                    else if (fragment instanceof HowToWriteContractFragment)
+                        temp = tags[i];
+                }
+                break;
+            }
+        }
         return temp != null ? true : false;
     }
 

@@ -1,5 +1,6 @@
 package com.spaceplanning.app.spacecontract.BottomNaviFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.spaceplanning.app.spacecontract.MainActivity;
 import com.spaceplanning.app.spacecontract.R;
+import com.spaceplanning.app.spacecontract.WriteContractFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,12 +42,15 @@ public class HomeFragment extends Fragment {
 
     @NotNull
     private View.OnClickListener homeItemClickEvent() {
+        Fragment fragment_write_contract = new WriteContractFragment();
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.cv_gocontract:
                         Toast.makeText(getContext(), "계약서 작성", Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).replaceFragment(fragment_write_contract, "write_contract");
+
                         break;
                     case R.id.cv_how_to_use_contract:
                         Toast.makeText(getContext(), "계약서 작성법", Toast.LENGTH_SHORT).show();
@@ -54,4 +59,7 @@ public class HomeFragment extends Fragment {
             }
         };
     }
+
+
+
 }
