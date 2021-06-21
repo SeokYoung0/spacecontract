@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import com.spaceplanning.app.spacecontract.BottomNaviFragment.MenuFragmentInList
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.NoticeFragment;
 
 public class MainActivity extends AppCompatActivity implements IOnClickMenuButtonListener {
+    PreferenceManager mPreferenceManager;
     //Title Toolbar
     TextView textview_title;
     ImageView iv_logo;
@@ -124,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             }
         });
     }
+
+
 
 
     // Fragment별 이동
@@ -242,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         switch (ButtonId) {
             case "btn_accountsetting":
                 replaceFragment(fragment_account_setting, "accountsetting");
+                toolbarSetting("내 정보", View.GONE);
+                viewPagerItemVisibility(View.GONE);
                 break;
         }
     }

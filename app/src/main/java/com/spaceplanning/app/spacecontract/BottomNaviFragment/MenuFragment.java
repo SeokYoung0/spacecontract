@@ -31,6 +31,7 @@ public class MenuFragment extends Fragment {
     private Context mContext;
     private Button btn_logout;
     private Button btn_accountsetting;
+    private Button btn_withdrawal;
     private OAuthLogin mOAuthLoginModule;
 
 
@@ -71,9 +72,18 @@ public class MenuFragment extends Fragment {
             }
         });
 
+
+        //연동된 이메일 탈퇴 기능
+        btn_withdrawal = (Button)view.findViewById(R.id.btn_withdrawal);
+        btn_withdrawal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         return view;
-
-
     }
 
     @Override

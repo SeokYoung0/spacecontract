@@ -20,4 +20,15 @@
         <item name="android:layout_marginRight">20dp</item>
     </style>
 
+    <style name="account_setting" parent="@style/Widget.AppCompat.Button">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:drawableTint">@color/black</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:background">@drawable/buttonclickeffect</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:enabled">false</item>
+    </style>
+
 </resources>
