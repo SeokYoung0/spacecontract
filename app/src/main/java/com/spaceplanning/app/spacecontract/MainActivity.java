@@ -31,6 +31,7 @@ import com.spaceplanning.app.spacecontract.BottomNaviFragment.MenuFragmentInList
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.NoticeFragment;
 
 public class MainActivity extends AppCompatActivity implements IOnClickMenuButtonListener {
+    PreferenceManager mPreferenceManager;
     //Title Toolbar
     TextView textview_title;
     ImageView iv_logo;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             }
         });
         setupIndicators(images.length);
+
         // 계약서 작성법 버튼 및 계약하기 버튼
 
         bottomNavigationClick();
@@ -247,6 +249,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         switch (ButtonId) {
             case "btn_accountsetting":
                 replaceFragment(fragment_account_setting, "accountsetting");
+                toolbarSetting("내 정보", View.GONE);
+                viewPagerItemVisibility(View.GONE);
                 break;
         }
     }

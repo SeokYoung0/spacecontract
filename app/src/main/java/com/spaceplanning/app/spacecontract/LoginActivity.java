@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     LinearLayout ll_google_login;
     GoogleSignInClient mGoogleSignInClient;
     NaverHandler mNaverHandler;
+    private PreferenceManager mPreferenceManager;
 
 
     OAuthLogin mOAuthLoginModule;
@@ -111,8 +112,8 @@ public class LoginActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Log.d("google", account.getEmail());
-            Log.d("google", account.getId());
+            mPreferenceManager.setString(mContext,"email" , account.getEmail());
+            mPreferenceManager.setString(mContext,"name" , account.getFamilyName() + account.getGivenName());
             finish();
             // Signed in successfully, show authenticated UI.
 
