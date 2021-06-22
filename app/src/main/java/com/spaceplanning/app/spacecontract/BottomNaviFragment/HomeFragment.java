@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public class HomeFragment extends Fragment {
     private CardView cv_gocontract;
     private CardView cv_how_to_use_contract;
+    private CardView cv_save_file;
 
 
 
@@ -34,9 +35,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        cv_gocontract = (CardView) view.findViewById(R.id.cv_gocontract);
+        cv_save_file = (CardView) view.findViewById(R.id.cv_save_file);
         cv_how_to_use_contract = (CardView) view.findViewById(R.id.cv_how_to_use_contract);
-        cv_gocontract.setOnClickListener(homeItemClickEvent());
+        cv_save_file.setOnClickListener(homeItemClickEvent());
         cv_how_to_use_contract.setOnClickListener(homeItemClickEvent());
 
         ((MainActivity)getActivity()).viewPagerItemVisibility(View.VISIBLE);
@@ -52,7 +53,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
-                    case R.id.cv_gocontract:
+                    case R.id.cv_save_file:
                         ((MainActivity)getActivity()).replaceFragment(fragment_write_contract, "write contract");
 
                         break;

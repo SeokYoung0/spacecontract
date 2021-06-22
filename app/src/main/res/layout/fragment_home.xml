@@ -11,25 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="12dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_margin="4dp"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="개발 중..."
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    />
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +54,7 @@
                             android:layout_marginLeft="20dp"
                             android:textColor="#B6B6B6"
                             android:layout_gravity="center_vertical"
-                            android:text="계약서 작성 방법 보러가기 ">
+                            android:text="계약서 작성 방법 살펴보기 ">
 
                         </TextView>
                     </LinearLayout>
@@ -115,7 +96,7 @@
                             android:gravity="center|left"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
-                            android:text="계약하러가기 →"/>
+                            android:text="계약서 작성→"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -123,7 +104,57 @@
                             android:layout_marginLeft="20dp"
                             android:textColor="#B6B6B6"
                             android:layout_gravity="center_vertical"
-                            android:text="계약할 문서를 보러가기 ">
+                            android:text="계약할 문서를 작성하기">
+
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cv_save_file"
+                android:layout_margin="4dp"
+                android:layout_gravity="center">
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:paddingTop="20dp">
+                    <ImageView
+                        android:id="@+id/card_of_addFill_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_baseline_contact_mail_24"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="left"
+                        app:tint="@color/space_color" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_toRightOf="@id/card_of_addFill_image"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|left"
+                            android:gravity="center|left"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="공정표 저장→"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="#B6B6B6"
+                            android:layout_gravity="center_vertical"
+                            android:text="파일 첨부 하기 ">
 
                         </TextView>
                     </LinearLayout>

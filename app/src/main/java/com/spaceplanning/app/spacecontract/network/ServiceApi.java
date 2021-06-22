@@ -1,7 +1,5 @@
 package com.spaceplanning.app.spacecontract.network;
 
-import com.google.android.gms.auth.TokenData;
-
 
 import javax.xml.transform.Result;
 
@@ -13,10 +11,14 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface  ServiceApi {
-    @POST("/send/contract/")
-    Call<ContractResponse> userLogin(@Body ContractData data);
 
     @Multipart
     @POST("/api/upload/")
     Call<Result> uploadImage(@Part MultipartBody.Part File);
+
+    @POST("/send/contract/")
+    Call<ContractResponse> userLogin(@Body ContractData data);
+
+    @POST("/upload-multi")
+    Call<AttachedFileResponse> attachedFiles(@Body AttachedFileData data);
 }

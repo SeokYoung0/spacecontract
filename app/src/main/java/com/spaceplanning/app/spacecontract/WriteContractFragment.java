@@ -23,31 +23,48 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
+import com.spaceplanning.app.spacecontract.network.AttachedFile;
+import com.spaceplanning.app.spacecontract.network.AttachedFileData;
+import com.spaceplanning.app.spacecontract.network.AttachedFileResponse;
 import com.spaceplanning.app.spacecontract.network.RealPathFromURI;
+import com.spaceplanning.app.spacecontract.network.RetrofitClient;
+import com.spaceplanning.app.spacecontract.network.ServiceApi;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WriteContractFragment extends Fragment {
 
     private RealPathFromURI mRealPathFromURI;
+    private List<String> tempData;
+
     private EditText mFileName_1;
     private EditText mFileName_2;
     private EditText mFileName_3;
     private Button mUploadFileBtn_1;
     private Button mUploadFileBtn_2;
     private Button mUploadFileBtn_3;
+    private Button mUpload_files;
 
+    private ServiceApi service;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mRealPathFromURI = new RealPathFromURI();
+        tempData = new ArrayList<>();
+
+
     }
 
     @Nullable
@@ -92,6 +109,15 @@ public class WriteContractFragment extends Fragment {
                 getActivity().startActivityForResult(intent_upload, 3);
             }
         });
+
+        mUpload_files = view.findViewById(R.id.upload_files);
+        mUpload_files.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AttachedFileData uploadData = new AttachedFileData(tempData);
+                upload_files(uploadData);
+            }
+        });
         return view;
     }
 
@@ -110,6 +136,9 @@ public class WriteContractFragment extends Fragment {
                returnCursor.moveToFirst();
 
                mFileName_1.setText(returnCursor.getString(nameIndex));
+               String file_1_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
+               Log.e("WriteContractFragment", file_1_path);
+               tempData.add(file_1_path);
                returnCursor.close();
                break;
            case 2:
@@ -120,6 +149,8 @@ public class WriteContractFragment extends Fragment {
                returnCursor.moveToFirst();
 
                mFileName_2.setText(returnCursor.getString(nameIndex));
+               String file_2_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
+               tempData.add(file_2_path);
                returnCursor.close();
                break;
            case 3:
@@ -130,9 +161,27 @@ public class WriteContractFragment extends Fragment {
                returnCursor.moveToFirst();
 
                mFileName_3.setText(returnCursor.getString(nameIndex));
+               String file_3_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
+               tempData.add(file_3_path);
                returnCursor.close();
                break;
        }
+    }
+
+    public void upload_files(AttachedFileData data) {
+        service = RetrofitClient.getClient().create(ServiceApi.class);
+        service.attachedFiles(data).enqueue(new Callback<AttachedFileResponse>(){
+
+            @Override
+            public void onResponse(Call<AttachedFileResponse> call, Response<AttachedFileResponse> response) {
+                Log.e("WriteContractFragment", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<AttachedFileResponse> call, Throwable t) {
+                Log.e("WriteContractFragment", t.getMessage());
+            }
+        });
     }
 
 }
