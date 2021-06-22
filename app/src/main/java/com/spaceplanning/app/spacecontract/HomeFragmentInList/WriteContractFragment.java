@@ -1,4 +1,4 @@
-package com.spaceplanning.app.spacecontract;
+package com.spaceplanning.app.spacecontract.HomeFragmentInList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +23,8 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
+import com.spaceplanning.app.spacecontract.MainActivity;
+import com.spaceplanning.app.spacecontract.R;
 import com.spaceplanning.app.spacecontract.network.AttachedFile;
 import com.spaceplanning.app.spacecontract.network.AttachedFileData;
 import com.spaceplanning.app.spacecontract.network.AttachedFileResponse;

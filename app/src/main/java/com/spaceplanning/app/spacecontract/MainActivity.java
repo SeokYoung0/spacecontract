@@ -9,11 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +25,9 @@ import com.spaceplanning.app.spacecontract.BottomNaviFragment.IOnClickMenuButton
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.MenuFragment;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.MenuFragmentInList.AccountSettingFragment;
 import com.spaceplanning.app.spacecontract.BottomNaviFragment.NoticeFragment;
+import com.spaceplanning.app.spacecontract.HomeFragmentInList.HowToWriteContractFragment;
+import com.spaceplanning.app.spacecontract.HomeFragmentInList.UploadFilesFragment;
+import com.spaceplanning.app.spacecontract.HomeFragmentInList.WriteContractFragment;
 
 public class MainActivity extends AppCompatActivity implements IOnClickMenuButtonListener {
     PreferenceManager mPreferenceManager;
@@ -206,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         return temp != null ? true : false;
     }
     private boolean isContractFragments() {
-        String[] tags = {"write contract","how to write contract"};
+        String[] tags = {"write contract","how to write contract", "upload files"};
         String temp = null;
 
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
@@ -216,6 +215,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
                     if (fragment instanceof WriteContractFragment)
                         temp = tags[i];
                     else if (fragment instanceof HowToWriteContractFragment)
+                        temp = tags[i];
+                    else if(fragment instanceof UploadFilesFragment)
                         temp = tags[i];
                 }
                 break;
