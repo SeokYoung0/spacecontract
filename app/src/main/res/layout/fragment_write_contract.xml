@@ -5,9 +5,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+        android:layout_height="match_parent">
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
@@ -15,95 +13,91 @@
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
-               android:text="공정표, 하자이행보증권 등 \n기타 서류 파일을 선택 해주세요!"
+               android:text="계약서 작성"
                android:textSize="24dp"
                android:layout_margin="24dp"
                android:layout_gravity="center">
            </TextView>
 
+           <WebView
+               android:layout_width="match_parent"
+               android:layout_height="400dp"
+               android:id="@+id/contract_viewer"/>
            <LinearLayout
-               android:id="@+id/upload_file_1"
+               android:id="@+id/person1_profile"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:orientation="horizontal"
+               android:orientation="vertical"
+               android:layout_gravity="center"
                android:layout_marginLeft="20dp"
                android:layout_marginRight="20dp"
                android:layout_marginBottom="12dp">
                <EditText
-                   android:id="@+id/upload_file_name_1"
-                   android:layout_width="wrap_content"
+                   android:id="@+id/person1_name"
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:hint="공정표, 하자이행보증권 등..."
-                   android:focusable="false"
-                   android:clickable="false"
-                   android:ems="10"
-                   android:layout_weight="9">
+                   android:hint="계약인 이름(소비자)"
+                   android:focusable="true"
+                   android:ems="10">
                </EditText>
-               <Button
-                   android:id="@+id/upload_file_btn_1"
-                   android:layout_width="wrap_content"
+               <EditText
+                   android:id="@+id/person1_phonenumber"
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="파일 첨부 "
-                   android:layout_weight="1"></Button>
+                   android:hint="계약인 전화번호(소비자)"
+                   android:focusable="true"
+                   android:ems="10">
+               </EditText>
+               <EditText
+                   android:id="@+id/person1_email"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="계약인 이메일(소비자)"
+                   android:focusable="true"
+                   android:ems="10">
+               </EditText>
            </LinearLayout>
            <LinearLayout
-               android:id="@+id/upload_file_2"
+               android:id="@+id/person2_profile"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:orientation="horizontal"
+               android:orientation="vertical"
                android:layout_marginLeft="20dp"
                android:layout_marginRight="20dp"
                android:layout_marginBottom="12dp">
                <EditText
-                   android:id="@+id/upload_file_name_2"
-                   android:layout_width="wrap_content"
+                   android:id="@+id/person2_name"
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:hint="공정표, 하자이행보증권 등..."
-                   android:focusable="false"
-                   android:clickable="false"
-                   android:ems="10"
-                   android:layout_weight="9">
+                   android:hint="계약인 이름(업체)"
+                   android:focusable="true"
+                   android:ems="10">
                </EditText>
-               <Button
-                   android:id="@+id/upload_file_btn_2"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="파일 첨부 "
-                   android:layout_weight="1"></Button>
-           </LinearLayout>
-           <LinearLayout
-               android:id="@+id/upload_file_3"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_marginLeft="20dp"
-               android:layout_marginRight="20dp"
-               android:layout_marginBottom="12dp">
                <EditText
-                   android:id="@+id/upload_file_name_3"
-                   android:layout_width="wrap_content"
+                   android:id="@+id/person2_phonenumber"
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:hint="공정표, 하자이행보증권 등..."
-                   android:focusable="false"
-                   android:clickable="false"
-                   android:ems="10"
-                   android:layout_weight="9">
+                   android:hint="계약인 전화번호(업체)"
+                   android:focusable="true"
+                   android:ems="10">
                </EditText>
-               <Button
-                   android:id="@+id/upload_file_btn_3"
-                   android:layout_width="wrap_content"
+               <EditText
+                   android:id="@+id/person2_email"
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="파일 첨부 "
-                   android:layout_weight="1"></Button>
+                   android:hint="계약인 이메일(업체)"
+                   android:focusable="true"
+                   android:ems="10">
+               </EditText>
+
            </LinearLayout>
 
            <Button
-               android:id="@+id/upload_files"
+               android:id="@+id/upload_contract"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="저장하기"
                android:layout_margin="4dp"></Button>
        </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

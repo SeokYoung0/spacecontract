@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.loader.content.Loader;
 
 import com.spaceplanning.app.spacecontract.MainActivity;
 import com.spaceplanning.app.spacecontract.R;
@@ -36,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -49,13 +52,14 @@ public class WriteContractFragment extends Fragment {
     private RealPathFromURI mRealPathFromURI;
     private List<String> tempData;
 
-    private EditText mFileName_1;
-    private EditText mFileName_2;
-    private EditText mFileName_3;
-    private Button mUploadFileBtn_1;
-    private Button mUploadFileBtn_2;
-    private Button mUploadFileBtn_3;
-    private Button mUpload_files;
+    private EditText person1_name;
+    private EditText person1_phonenumber;
+    private EditText person1_email;
+    private EditText person2_name;
+    private EditText person2_phonenumber;
+    private EditText person2_email;
+    private Button upload_contract;
+    private WebView contract_viewer;
 
     private ServiceApi service;
 
@@ -77,113 +81,47 @@ public class WriteContractFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_write_contract, container, false);
         ((MainActivity)getActivity()).viewPagerItemVisibility(View.GONE);
 
-        mFileName_1 = view.findViewById(R.id.upload_file_name_1);
-        mFileName_2 = view.findViewById(R.id.upload_file_name_2);
-        mFileName_3 = view.findViewById(R.id.upload_file_name_3);
-        mUploadFileBtn_1 = view.findViewById(R.id.upload_file_btn_1);
-        mUploadFileBtn_2 = view.findViewById(R.id.upload_file_btn_2);
-        mUploadFileBtn_3 = view.findViewById(R.id.upload_file_btn_3);
+        person1_name = (EditText)view.findViewById(R.id.person1_name);
+        person1_phonenumber = (EditText)view.findViewById(R.id.person1_phonenumber);
+        person1_email = (EditText)view.findViewById(R.id.person1_email);
+        person2_name = (EditText)view.findViewById(R.id.person2_name);
+        person2_phonenumber = (EditText)view.findViewById(R.id.person2_phonenumber);
+        person2_email = (EditText)view.findViewById(R.id.person2_email);
+        upload_contract = (Button)view.findViewById(R.id.upload_contract);
+        contract_viewer = (WebView)view.findViewById(R.id.contract_viewer);
 
-        mUploadFileBtn_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_upload = new Intent();
-                intent_upload.setType("application/pdf");
-                intent_upload.setAction(Intent.ACTION_GET_CONTENT);
-                getActivity().startActivityForResult(intent_upload, 1);
-            }
-        });
-        mUploadFileBtn_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_upload = new Intent();
-                intent_upload.setType("application/pdf");
-                intent_upload.setAction(Intent.ACTION_GET_CONTENT);
-                getActivity().startActivityForResult(intent_upload, 2);
-            }
-        });
-        mUploadFileBtn_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_upload = new Intent();
-                intent_upload.setType("application/pdf");
-                intent_upload.setAction(Intent.ACTION_GET_CONTENT);
-                getActivity().startActivityForResult(intent_upload, 3);
-            }
-        });
 
-        mUpload_files = view.findViewById(R.id.upload_files);
-        mUpload_files.setOnClickListener(new View.OnClickListener() {
+        upload_contract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AttachedFileData uploadData = new AttachedFileData(tempData);
-                upload_files(uploadData);
+                CheckDefault();
             }
         });
         return view;
     }
 
+    private void CheckDefault() {
+        EditText[] texts = {person1_name, person1_phonenumber, person2_name, person2_phonenumber};
+        HashMap<EditText, String> textmap = new HashMap<EditText, String>();
+        textmap.put(person1_name, "계약인 이름(소비자)");
+        textmap.put(person1_phonenumber, "계약인 전화번호(소비자)");
+        textmap.put(person2_name, "계약인 이름(업체)");
+        textmap.put(person2_phonenumber, "계약인 전화번호(업체)");
+
+        for (EditText text: texts)
+        {
+            Log.d("Tag", "hello :" + text.getText());
+            if (text.getText().length() <= 0) {
+                String textValue= textmap.get(text);
+                Toast.makeText(getContext(), textValue + "는 필수 입력 사항입니다.", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri returnUri;
-        Cursor returnCursor;
-        int nameIndex;
-       switch (requestCode) {
-           case 1:
-               returnUri = data.getData();
-               returnCursor =
-                       getActivity().getContentResolver().query(returnUri, null, null, null, null);
-               nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-               returnCursor.moveToFirst();
 
-               mFileName_1.setText(returnCursor.getString(nameIndex));
-               String file_1_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
-               Log.e("WriteContractFragment", file_1_path);
-               tempData.add(file_1_path);
-               returnCursor.close();
-               break;
-           case 2:
-               returnUri = data.getData();
-               returnCursor =
-                       getActivity().getContentResolver().query(returnUri, null, null, null, null);
-               nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-               returnCursor.moveToFirst();
-
-               mFileName_2.setText(returnCursor.getString(nameIndex));
-               String file_2_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
-               tempData.add(file_2_path);
-               returnCursor.close();
-               break;
-           case 3:
-               returnUri = data.getData();
-               returnCursor =
-                       getActivity().getContentResolver().query(returnUri, null, null, null, null);
-               nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-               returnCursor.moveToFirst();
-
-               mFileName_3.setText(returnCursor.getString(nameIndex));
-               String file_3_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
-               tempData.add(file_3_path);
-               returnCursor.close();
-               break;
-       }
     }
-
-    public void upload_files(AttachedFileData data) {
-        service = RetrofitClient.getClient().create(ServiceApi.class);
-        service.attachedFiles(data).enqueue(new Callback<AttachedFileResponse>(){
-
-            @Override
-            public void onResponse(Call<AttachedFileResponse> call, Response<AttachedFileResponse> response) {
-                Log.e("WriteContractFragment", response.message());
-            }
-
-            @Override
-            public void onFailure(Call<AttachedFileResponse> call, Throwable t) {
-                Log.e("WriteContractFragment", t.getMessage());
-            }
-        });
-    }
-
 }

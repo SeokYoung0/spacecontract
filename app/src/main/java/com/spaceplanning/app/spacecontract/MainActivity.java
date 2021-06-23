@@ -30,6 +30,7 @@ import com.spaceplanning.app.spacecontract.HomeFragmentInList.UploadFilesFragmen
 import com.spaceplanning.app.spacecontract.HomeFragmentInList.WriteContractFragment;
 
 public class MainActivity extends AppCompatActivity implements IOnClickMenuButtonListener {
+    private static final String TAG = "MainActivity";
     PreferenceManager mPreferenceManager;
     //Title Toolbar
     TextView textview_title;
@@ -294,6 +295,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        int position = getIntent().getIntExtra("Position",0);
+        Log.d(TAG,"position : " + position);
         checkRequestCode(requestCode, resultCode, data);
     }
 
@@ -312,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     }
 
     private void fragmentOnActivityResult(int requestCode, int resultCode, @org.jetbrains.annotations.Nullable @Nullable Intent data) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("write contract");
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("upload files");
         fragment.onActivityResult(requestCode, resultCode, data);
     }
 }
