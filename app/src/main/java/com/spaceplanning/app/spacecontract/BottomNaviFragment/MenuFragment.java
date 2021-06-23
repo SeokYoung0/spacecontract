@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.spaceplanning.app.spacecontract.LoginActivity;
+import com.spaceplanning.app.spacecontract.PreferenceManager;
 import com.spaceplanning.app.spacecontract.R;
 
 public class MenuFragment extends Fragment {
@@ -58,6 +59,7 @@ public class MenuFragment extends Fragment {
                 GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(getContext(), gso);
                 googleSignInClient.signOut();
                 Toast.makeText(getActivity(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
+                PreferenceManager.clear(getContext());
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }

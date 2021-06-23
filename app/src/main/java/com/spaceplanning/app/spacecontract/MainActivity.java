@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         //슬라이드 이미지
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
-        viewFadingEdge = findViewById(R.id.viewFadingEdge);
+//        viewFadingEdge = findViewById(R.id.viewFadingEdge);
 
-        viewFadingEdge.setVisibility(View.GONE);
+//        viewFadingEdge.setVisibility(View.GONE);
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
 
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     public void viewPagerItemVisibility(int visible) {
         sliderViewPager.setVisibility(visible);
         layoutIndicator.setVisibility(visible);
-        viewFadingEdge.setVisibility(visible);
+//        viewFadingEdge.setVisibility(visible);
     }
 
 
@@ -295,8 +295,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        int position = getIntent().getIntExtra("Position",0);
-        Log.d(TAG,"position : " + position);
         checkRequestCode(requestCode, resultCode, data);
     }
 

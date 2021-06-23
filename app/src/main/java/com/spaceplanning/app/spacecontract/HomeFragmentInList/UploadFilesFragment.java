@@ -131,14 +131,15 @@ public class UploadFilesFragment extends Fragment {
         switch (requestCode) {
             case 1:
                 returnUri = data.getData();
+                Log.d(TAG, "file Path1 : " + data.getData());
                 returnCursor =
                         getActivity().getContentResolver().query(returnUri, null, null, null, null);
                 nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                 returnCursor.moveToFirst();
-                Log.d(TAG, "file Path : " + getContext().getFileStreamPath(String.valueOf(nameIndex)));
+                Log.d(TAG, "file Path2 : " + getContext().getFileStreamPath(String.valueOf(nameIndex)));
                 mFileName_1.setText(returnCursor.getString(nameIndex));
                 String file_1_path = mRealPathFromURI.getRealPathFromURI(getActivity(),returnUri);
-                Log.d(TAG, "path_1 : " + file_1_path);
+                Log.d(TAG, "file Path3 : " + file_1_path);
                 tempData.add(file_1_path);
                 returnCursor.close();
                 break;

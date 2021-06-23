@@ -20,16 +20,20 @@
                 android:id="@+id/cv_how_to_use_contract"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp">
+                android:layout_margin="4dp"
+                app:cardCornerRadius="20dp"
+                app:cardUseCompatPadding="true">
                 <RelativeLayout
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:paddingTop="20dp">
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
                     <ImageView
                         android:id="@+id/card_of_help_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_baseline_campaign_24"
+                        android:background="@drawable/ic_baseline_campaign_24"
+                        android:backgroundTint="@color/space_color"
                         android:layout_marginLeft="20dp"
                         android:layout_gravity="left"
                         app:tint="@color/space_color" />
@@ -70,16 +74,21 @@
                 android:id="@+id/cv_gocontract"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp">
+                android:layout_margin="4dp"
+                app:cardCornerRadius="20dp"
+                app:cardUseCompatPadding="true"
+                >
                 <RelativeLayout
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:paddingTop="20dp">
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
                     <ImageView
                         android:id="@+id/card_of_pdf_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_baseline_picture_as_pdf_24"
+                        android:background="@drawable/ic_baseline_picture_as_pdf_24"
+                        android:backgroundTint="@color/space_color"
                         android:layout_marginLeft="20dp"
                         android:layout_gravity="left"
                         app:tint="@color/space_color" />
@@ -120,16 +129,20 @@
                 android:layout_height="match_parent"
                 android:id="@+id/cv_save_file"
                 android:layout_margin="4dp"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                app:cardCornerRadius="20dp"
+                app:cardUseCompatPadding="true">
                 <RelativeLayout
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:paddingTop="20dp">
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
                     <ImageView
                         android:id="@+id/card_of_addFill_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_baseline_contact_mail_24"
+                        android:background="@drawable/ic_baseline_contact_mail_24"
+                        android:backgroundTint="@color/space_color"
                         android:layout_marginLeft="20dp"
                         android:layout_gravity="left"
                         app:tint="@color/space_color" />
