@@ -5,8 +5,16 @@ import com.google.gson.annotations.SerializedName;
 public class ContractResponse {
 
     @SerializedName("code")
-    private int code;
+    private String code;
 
     @SerializedName("message")
-    private String mesage;
+    private String message;
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

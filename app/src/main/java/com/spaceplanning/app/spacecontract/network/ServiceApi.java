@@ -16,9 +16,12 @@ public interface  ServiceApi {
     @POST("/api/upload/")
     Call<Result> uploadImage(@Part MultipartBody.Part File);
 
-    @POST("/send/contract/")
-    Call<ContractResponse> userLogin(@Body ContractData data);
+    @POST("/api/eform/send/contract/")
+    Call<ContractResponse> sendContract(@Body ContractData data);
 
     @POST("/upload-multi")
     Call<AttachedFileResponse> attachedFiles(@Body AttachedFileData data);
+
+    @POST("/preview")
+    Call<PreViewRespone> FormUrl(@Body PreViewData data);
 }

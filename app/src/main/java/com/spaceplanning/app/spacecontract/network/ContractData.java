@@ -3,20 +3,20 @@ package com.spaceplanning.app.spacecontract.network;
 import com.google.gson.annotations.SerializedName;
 
 public class ContractData {
-    @SerializedName("contractor")
-    private String contractor;
+    @SerializedName("company")
+    private String company;
 
     @SerializedName("client")
     private String client;
 
-    @SerializedName("contractorEmail")
-    private String contractorEmail;
+    @SerializedName("companyEmail")
+    private String companyEmail;
 
     @SerializedName("clientEmail")
     private String clientEmail;
 
-    @SerializedName("contractorPhone")
-    private String contractorPhone;
+    @SerializedName("companyPhone")
+    private String companyPhone;
 
     @SerializedName("clientPhone")
     private String clientPhone;
@@ -27,4 +27,15 @@ public class ContractData {
     @SerializedName("expirationDate")
     private String expirationDate;
 
+
+    public ContractData(String company, String client, String companyEmail, String clientEmail, String companyPhone, String clientPhone, String formId, String expirationDate) {
+        this.company = company;
+        this.client = client;
+        this.companyEmail = companyEmail;
+        this.clientEmail = clientEmail;
+        this.companyPhone = companyPhone;
+        this.clientPhone = clientPhone;
+        this.formId = formId;
+        this.expirationDate = expirationDate;
+    }
 }

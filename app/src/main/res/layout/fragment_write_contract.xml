@@ -23,6 +23,10 @@
                android:layout_width="match_parent"
                android:layout_height="400dp"
                android:id="@+id/contract_viewer"/>
+           <Button
+               android:id="@+id/btn_formid"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
            <LinearLayout
                android:id="@+id/person1_profile"
                android:layout_width="match_parent"
