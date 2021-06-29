@@ -187,40 +187,6 @@ public class UploadFilesFragment extends Fragment {
         }
     }
 
-//    public readFile(){
-//        file = new File(Environment.getExternalStorageDirectory()
-//                .getAbsolutePath()+Environment.DIRECTORY_DOWNLOADS );
-//        try{
-//            BufferedReader reader = new BufferedReader(new FileReader(file));
-//            StringBuffer buffer = new StringBuffer();
-//            String line;
-//            while ((line = reader.readLine() != null)) {
-//                Buffer.append(line);
-//            }
-//            Reader.close();
-//        }catch (Exception e){
-//            e.printStackTrace();;
-//        }
-//        return ;
-//    }
-
-    public void upload_files(HashMap data) {
-        service = RetrofitClient.getClient().create(ServiceApi.class);
-        service.attachedFiles(data).enqueue(new Callback<AttachedFileResponse>(){
-
-            @Override
-            public void onResponse(Call<AttachedFileResponse> call, Response<AttachedFileResponse> response) {
-                Log.d(TAG,response.body().getMessage());
-                Log.e(TAG, response.message());
-            }
-
-            @Override
-            public void onFailure(Call<AttachedFileResponse> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
-    }
-
 
     public void postAttachment(File file) {
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/application/pdf"), file.getPath());

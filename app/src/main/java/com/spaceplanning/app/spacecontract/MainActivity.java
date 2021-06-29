@@ -29,6 +29,8 @@ import com.spaceplanning.app.spacecontract.HomeFragmentInList.HowToWriteContract
 import com.spaceplanning.app.spacecontract.HomeFragmentInList.UploadFilesFragment;
 import com.spaceplanning.app.spacecontract.HomeFragmentInList.WriteContractFragment;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements IOnClickMenuButtonListener {
     private static final String TAG = "MainActivity";
     PreferenceManager mPreferenceManager;
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             R.drawable.img3
     };
 
+    // Constant Request Code
+    int IMG_FROM_WRITE_CONTRACT_FRAGMENT = 1;
+    int HWP_FROM_WRITE_CONTRACT_FRAGMENT = 2;
+    int PDF_FROM_WRITE_CONTRACT_FRAGMENT = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +82,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
         //슬라이드 이미지
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
-//        viewFadingEdge = findViewById(R.id.viewFadingEdge);
 
-//        viewFadingEdge.setVisibility(View.GONE);
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
 
@@ -106,30 +111,27 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        replaceFragment(fragment_home, "home");
-                        toolbarSetting("Space 계약", View.VISIBLE);
-                        viewPagerItemVisibility(View.VISIBLE);
+                        viewAsFragmentChange(fragment_home, "home", "Space 계약", View.VISIBLE);
                         break;
                     case R.id.consulting:
-
-                        replaceFragment(fragment_consulting, "consulting");
-                        toolbarSetting("상담", View.GONE);
-                        viewPagerItemVisibility(View.GONE);
+                        viewAsFragmentChange(fragment_consulting, "consulting", "상담", View.GONE);
                         break;
                     case R.id.menu:
-                        replaceFragment(fragment_menu, "menu");
-                        toolbarSetting("메뉴", View.GONE);
-                        viewPagerItemVisibility(View.GONE);
+                        viewAsFragmentChange(fragment_menu, "menu", "메뉴", View.GONE);
                         break;
                     case R.id.notice:
-                        replaceFragment(fragment_notice, "notice");
-                        toolbarSetting("알림", View.GONE);
-                        viewPagerItemVisibility(View.GONE);
+                        viewAsFragmentChange(fragment_notice, "notice", "알림", View.GONE);
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void viewAsFragmentChange(Fragment fragment, String tag, String toolbarTitle, int visible) {
+        replaceFragment(fragment, tag);
+        toolbarSetting(toolbarTitle, visible);
+        viewPagerItemVisibility(visible);
     }
 
 
@@ -250,9 +252,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     public void onMenuButtonSelected(String ButtonId) {
         switch (ButtonId) {
             case "btn_accountsetting":
-                replaceFragment(fragment_account_setting, "accountsetting");
-                toolbarSetting("내 정보", View.GONE);
-                viewPagerItemVisibility(View.GONE);
+                viewAsFragmentChange(fragment_account_setting, "accountsetting", "내 정보", View.GONE);
                 break;
         }
     }
@@ -299,15 +299,12 @@ public class MainActivity extends AppCompatActivity implements IOnClickMenuButto
     }
 
     private void checkRequestCode(int requestCode, int resultCode, @org.jetbrains.annotations.Nullable Intent data) {
-        int IMG_FROM_WRITE_CONTRACT_FRAGMENT = 1;
-        int HWP_FROM_WRITE_CONTRACT_FRAGMENT = 2;
-        int PDF_FROM_WRITE_CONTRACT_FRAGMENT = 3;
+        ArrayList<Integer> RequestCodes = new ArrayList<>();
+        RequestCodes.add(PDF_FROM_WRITE_CONTRACT_FRAGMENT);
+        RequestCodes.add(HWP_FROM_WRITE_CONTRACT_FRAGMENT);
+        RequestCodes.add(IMG_FROM_WRITE_CONTRACT_FRAGMENT);
 
-        if(requestCode == PDF_FROM_WRITE_CONTRACT_FRAGMENT) {
-            fragmentOnActivityResult(requestCode, resultCode, data);
-        } else if(requestCode == HWP_FROM_WRITE_CONTRACT_FRAGMENT) {
-            fragmentOnActivityResult(requestCode, resultCode, data);
-        } else if(requestCode == IMG_FROM_WRITE_CONTRACT_FRAGMENT) {
+        if(RequestCodes.contains(requestCode)){
             fragmentOnActivityResult(requestCode, resultCode, data);
         }
     }
