@@ -39,9 +39,17 @@ public class RealPathFromURI {
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"),
-                        Long.valueOf(id));
+                Uri contentUri;
+                try {
+                    contentUri = ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"),
+                            Long.valueOf(id));
+                } catch(Exception e) {
+                    String getPath =id.split(":")[1];
+                    contentUri = ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"),
+                            Long.valueOf(getPath));
+                }
 
                 return getDataColumn(context, contentUri, null, null);
             }
