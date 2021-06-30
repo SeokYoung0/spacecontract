@@ -24,6 +24,7 @@ import android.widget.EditText;
 
 import com.spaceplanning.app.spacecontract.MainActivity;
 import com.spaceplanning.app.spacecontract.R;
+import com.spaceplanning.app.spacecontract.network.AttachedFileData;
 import com.spaceplanning.app.spacecontract.network.AttachedFileResponse;
 import com.spaceplanning.app.spacecontract.network.RealPathFromURI;
 import com.spaceplanning.app.spacecontract.network.RetrofitClient;
@@ -31,8 +32,13 @@ import com.spaceplanning.app.spacecontract.network.ServiceApi;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,7 +60,7 @@ public class UploadFilesFragment extends Fragment {
     private RealPathFromURI mRealPathFromURI;
     private RequestBody requestFile;
     private MultipartBody.Part[] multipartBody = new MultipartBody.Part[2];
-    private File[] tempData;
+    private AttachedFileData[] tempData;
     private Uri returnUri;
 
     private EditText mFileName_1;
@@ -72,7 +78,7 @@ public class UploadFilesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mRealPathFromURI = new RealPathFromURI();
-        tempData = new File[2];
+        tempData = new AttachedFileData[2];
 
 
     }
@@ -134,60 +140,68 @@ public class UploadFilesFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Cursor returnCursor;
-        int nameIndex;
-        String path;
-        Uri uri;
-
-
         switch (requestCode) {
             case 1:
-                String[] proj = {};
 
-                returnUri = data.getData();
-
-                Log.d(TAG, "file Path1 : " + data.getData());
-                returnCursor =
-                        getActivity().getContentResolver().query(returnUri, null , null, null, null);
-
-                nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-
-                returnCursor.moveToFirst();
-                mFileName_1.setText(returnCursor.getString(nameIndex));
-
-//                File file_1_path = new File();
-                File file = new File(data.getData().toString());
-                RequestBody date_file_1 = RequestBody.create(file , MediaType.parse("pdf"));
-                tempData[0] = file;
-                returnCursor.close();
+                getFileData(data, mFileName_1);
                 break;
             case 2:
-                returnUri = data.getData();
-                DocumentFile d = DocumentFile.fromSingleUri(getActivity(), returnUri);
-                Log.d(TAG, "file Path2 : " + returnUri.getPath());
-                returnCursor =
-                        getActivity().getContentResolver().query(returnUri, null, null, null, null);
-                nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                returnCursor.moveToFirst();
-                mFileName_2.setText(returnCursor.getString(nameIndex));
-
-                file = new File(data.getData().toString());
-                tempData[1] = file;
-                returnCursor.close();
+                getFileData(data, mFileName_2);
                 break;
             case 3:
-
                 break;
         }
     }
 
+    private void getFileData(@org.jetbrains.annotations.Nullable Intent data, EditText editText) {
+        Cursor returnCursor;
+        int nameIndex;
 
-    public void postAttachment(File[] files) {
+        returnUri = data.getData();
+        returnCursor = getActivity().getContentResolver().query(
+                returnUri, null , null, null, null);
 
-        for (int i = 0; i < files.length; i++) {
-            Log.d(TAG, "files : " + files[i]);
-            requestFile = RequestBody.create(MediaType.parse(""), files[i].getPath());
-            multipartBody[i] = MultipartBody.Part.createFormData("files",files[i].getName(),requestFile);
+        nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        returnCursor.moveToFirst();
+        AttachedFileData file = createAttachedFileData(returnCursor, nameIndex);
+        tempData[0] = file;
+
+        editText.setText(returnCursor.getString(nameIndex));
+        returnCursor.close();
+    }
+
+    @NotNull
+    private AttachedFileData createAttachedFileData(Cursor returnCursor, int nameIndex) {
+        String fileName = returnCursor.getString(nameIndex);
+        String fileType = getActivity().getContentResolver().getType(returnUri);
+        AttachedFileData file = new AttachedFileData(fileName,fileType,returnUri);
+        return file;
+    }
+
+    private String readTextFromUri(Uri uri) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+             BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+
+    public void postAttachment(AttachedFileData[] files) {
+        int count = 0;
+        for (AttachedFileData data : files) {
+            try {
+                requestFile = RequestBody.create(MediaType.parse(data.getFileType()), readTextFromUri(data.getFileUri()));
+                multipartBody[count] = MultipartBody.Part.createFormData("files",data.getFileName(),requestFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            count++;
         }
         service = RetrofitClient.getClient().create(ServiceApi.class);
         service.postAttachment(multipartBody).enqueue(new Callback<AttachedFileResponse>() {
