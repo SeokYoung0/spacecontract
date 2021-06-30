@@ -1,7 +1,5 @@
 package com.spaceplanning.app.spacecontract.HomeFragmentInList;
 
-import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -24,7 +24,6 @@ import android.widget.EditText;
 
 import com.spaceplanning.app.spacecontract.MainActivity;
 import com.spaceplanning.app.spacecontract.R;
-import com.spaceplanning.app.spacecontract.network.AttachedFileData;
 import com.spaceplanning.app.spacecontract.network.AttachedFileResponse;
 import com.spaceplanning.app.spacecontract.network.RealPathFromURI;
 import com.spaceplanning.app.spacecontract.network.RetrofitClient;
@@ -32,13 +31,8 @@ import com.spaceplanning.app.spacecontract.network.ServiceApi;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -58,7 +52,9 @@ public class UploadFilesFragment extends Fragment {
     }
 
     private RealPathFromURI mRealPathFromURI;
-    private HashMap<String, RequestBody> tempData;
+    private RequestBody requestFile;
+    private MultipartBody.Part[] multipartBody = new MultipartBody.Part[2];
+    private File[] tempData;
     private Uri returnUri;
 
     private EditText mFileName_1;
@@ -76,7 +72,7 @@ public class UploadFilesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mRealPathFromURI = new RealPathFromURI();
-        tempData = new HashMap<String, RequestBody>();
+        tempData = new File[2];
 
 
     }
@@ -128,7 +124,7 @@ public class UploadFilesFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                upload_files(tempData);
-                postAttachment(new File(returnUri.getPath()));
+                postAttachment(tempData);
             }
         });
         return view;
@@ -149,9 +145,8 @@ public class UploadFilesFragment extends Fragment {
                 String[] proj = {};
 
                 returnUri = data.getData();
-                Log.d(TAG, "file Path check1 : " + DocumentsContract.getDocumentId(returnUri));
-                Log.d(TAG, "file Path check1 : " + Environment.DIRECTORY_DOWNLOADS);
 
+                Log.d(TAG, "file Path1 : " + data.getData());
                 returnCursor =
                         getActivity().getContentResolver().query(returnUri, null , null, null, null);
 
@@ -162,23 +157,22 @@ public class UploadFilesFragment extends Fragment {
 
 //                File file_1_path = new File();
                 File file = new File(data.getData().toString());
-                RequestBody date_file_1 = RequestBody.create(file , MediaType.parse("application/pdf"));
-                tempData.put("file_1.pdf",date_file_1);
+                RequestBody date_file_1 = RequestBody.create(file , MediaType.parse("pdf"));
+                tempData[0] = file;
                 returnCursor.close();
                 break;
             case 2:
                 returnUri = data.getData();
-                Log.d(TAG, "file Path1 : " + data.getData());
+                DocumentFile d = DocumentFile.fromSingleUri(getActivity(), returnUri);
+                Log.d(TAG, "file Path2 : " + returnUri.getPath());
                 returnCursor =
                         getActivity().getContentResolver().query(returnUri, null, null, null, null);
                 nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                 returnCursor.moveToFirst();
                 mFileName_2.setText(returnCursor.getString(nameIndex));
 
-//                File file_1_path = new File();
-                Log.d(TAG, "file Path3 : " + returnUri.getLastPathSegment());
-                RequestBody date_file_2 = RequestBody.create(returnUri.getLastPathSegment(), MediaType.parse("application/pdf"));
-                tempData.put("file_2.pdf",date_file_2);
+                file = new File(data.getData().toString());
+                tempData[1] = file;
                 returnCursor.close();
                 break;
             case 3:
@@ -188,9 +182,13 @@ public class UploadFilesFragment extends Fragment {
     }
 
 
-    public void postAttachment(File file) {
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/application/pdf"), file.getPath());
-        MultipartBody.Part multipartBody =MultipartBody.Part.createFormData("files",file.getName(),requestFile);
+    public void postAttachment(File[] files) {
+
+        for (int i = 0; i < files.length; i++) {
+            Log.d(TAG, "files : " + files[i]);
+            requestFile = RequestBody.create(MediaType.parse(""), files[i].getPath());
+            multipartBody[i] = MultipartBody.Part.createFormData("files",files[i].getName(),requestFile);
+        }
         service = RetrofitClient.getClient().create(ServiceApi.class);
         service.postAttachment(multipartBody).enqueue(new Callback<AttachedFileResponse>() {
             @Override
@@ -204,6 +202,6 @@ public class UploadFilesFragment extends Fragment {
                 Log.e(TAG, t.getMessage());
             }
         });
-
     }
+
 }

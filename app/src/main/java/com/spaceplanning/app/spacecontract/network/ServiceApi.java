@@ -29,7 +29,7 @@ public interface  ServiceApi {
 
     @Multipart
     @POST("/upload-multi/")
-    Call<AttachedFileResponse> postAttachment(@Part MultipartBody.Part files);
+    Call<AttachedFileResponse> postAttachment(@Part MultipartBody.Part[] files);
 
     @POST("/preview")
     Call<PreViewRespone> FormUrl(@Body PreViewData data);
