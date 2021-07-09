@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-07-09T02:21:48.893Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" etag="lAXWaNCf1pHdb6C85OHs" version="14.8.5" type="github">
+<mxfile host="app.diagrams.net" modified="2021-07-09T02:43:38.257Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" etag="3fyovLdgr3mlVPPkzKyO" version="14.8.5" type="github">
   <diagram name="Page-1" id="c4acf3e9-155e-7222-9cf6-157b1a14988f">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
@@ -26,7 +26,7 @@
           <mxGeometry y="130" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="17acba5748e5396b-30" value="계약서" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;" parent="1" vertex="1">
-          <mxGeometry x="540" y="270" width="160" height="234" as="geometry" />
+          <mxGeometry x="370" y="265" width="160" height="120" as="geometry" />
         </mxCell>
         <mxCell id="17acba5748e5396b-31" value="+ 계약서 고유ID: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="17acba5748e5396b-30" vertex="1">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -65,7 +65,7 @@
           <mxGeometry y="182" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-26" value="계약" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;" vertex="1" parent="1">
-          <mxGeometry x="360" y="270" width="160" height="234" as="geometry" />
+          <mxGeometry x="180" y="265" width="160" height="130" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-27" value="+ 계약서: 계약서" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-26">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -80,7 +80,7 @@
           <mxGeometry y="104" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-30" value="공사 내용" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;" vertex="1" parent="1">
-          <mxGeometry x="550" y="520" width="160" height="234" as="geometry" />
+          <mxGeometry x="550" y="265" width="160" height="104" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-31" value="+ 공사 기간: Date" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-30">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -92,7 +92,7 @@
           <mxGeometry y="78" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-35" value="결제 명세서" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;" vertex="1" parent="1">
-          <mxGeometry x="360" y="520" width="160" height="234" as="geometry" />
+          <mxGeometry x="360" y="410" width="160" height="160" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-36" value="+ 결제 고유 ID: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-35">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -110,7 +110,7 @@
           <mxGeometry y="130" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-43" value="결제" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;" vertex="1" parent="1">
-          <mxGeometry x="180" y="520" width="160" height="234" as="geometry" />
+          <mxGeometry x="180" y="410" width="160" height="164" as="geometry" />
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-44" value="+ 결제 고유 ID: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-43">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -126,6 +126,27 @@
         </mxCell>
         <mxCell id="krRZJEmSN3m7MDrdvM92-48" value="+ 소비자 email: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-43">
           <mxGeometry y="130" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-58" value="기능" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="590" width="800" height="182" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-59" value="신규 사용자가 회원가입을 합니다. 회원 가입시 기업/ 소비자 선택에 따라 추가사항을 기록합니다. 기업일 경우 은행, 계좌정보를 추가로 기입합니다." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-58">
+          <mxGeometry y="26" width="800" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-63" value="사용자가 로그인을 합니다.  소비자가 계약서 양식을 내려 받습니다. 기업과 거래가 진행이 되면 기업도 동일한 양식을 부여받습니다." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-58">
+          <mxGeometry y="52" width="800" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-64" value="소비자가 공사 내용을 수정해서 기업과 주고 받으며 이를 지속적으로 수정 및 협상을 진행합니다." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-58">
+          <mxGeometry y="78" width="800" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-65" value="기업과 소비자가 협상이 완료가 되면 최종 공사과 계약 양식이 합쳐진 계약서로 도출됩니다." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-58">
+          <mxGeometry y="104" width="800" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-66" value="결제를 진행하게되면 기업과 거래된 금액을 소비자가 결제합니다." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-58">
+          <mxGeometry y="130" width="800" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="krRZJEmSN3m7MDrdvM92-67" value="결제가 완료되면 결제 명세서와 계약서를 조회할 수 있다." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="krRZJEmSN3m7MDrdvM92-58">
+          <mxGeometry y="156" width="800" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
