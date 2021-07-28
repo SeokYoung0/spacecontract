@@ -1,5 +1,7 @@
 package com.spaceplanning.app.spacecontract.HomeFragmentInList;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -34,9 +36,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -60,7 +65,7 @@ public class UploadFilesFragment extends Fragment {
     private RealPathFromURI mRealPathFromURI;
     private RequestBody requestFile;
     private MultipartBody.Part[] multipartBody = new MultipartBody.Part[2];
-    private AttachedFileData[] tempData;
+    private ArrayList<AttachedFileData> tempData;
     private Uri returnUri;
 
     private EditText mFileName_1;
@@ -78,7 +83,7 @@ public class UploadFilesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mRealPathFromURI = new RealPathFromURI();
-        tempData = new AttachedFileData[2];
+        tempData = new ArrayList<>();
 
 
     }
@@ -130,7 +135,11 @@ public class UploadFilesFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                upload_files(tempData);
-                postAttachment(tempData);
+                try {
+                    postAttachment(tempData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return view;
@@ -142,7 +151,6 @@ public class UploadFilesFragment extends Fragment {
 
         switch (requestCode) {
             case 1:
-
                 getFileData(data, mFileName_1);
                 break;
             case 2:
@@ -164,10 +172,11 @@ public class UploadFilesFragment extends Fragment {
         nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
         returnCursor.moveToFirst();
         AttachedFileData file = createAttachedFileData(returnCursor, nameIndex);
-        tempData[0] = file;
+        tempData.add(file);
 
         editText.setText(returnCursor.getString(nameIndex));
         returnCursor.close();
+        Log.d(TAG, "File Path! : "+ createCopyAndReturnRealPath(getActivity(), returnUri));
     }
 
     @NotNull
@@ -191,16 +200,12 @@ public class UploadFilesFragment extends Fragment {
         return stringBuilder.toString();
     }
 
-
-    public void postAttachment(AttachedFileData[] files) {
+    public void postAttachment(ArrayList<AttachedFileData> files) throws IOException {
         int count = 0;
+
         for (AttachedFileData data : files) {
-            try {
-                requestFile = RequestBody.create(MediaType.parse(data.getFileType()), readTextFromUri(data.getFileUri()));
-                multipartBody[count] = MultipartBody.Part.createFormData("files",data.getFileName(),requestFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            requestFile = RequestBody.create(MediaType.parse(data.getFileType()), new File(createCopyAndReturnRealPath(getActivity(), data.getFileUri())));
+            multipartBody[count] = MultipartBody.Part.createFormData("files",data.getFileName(),requestFile);
             count++;
         }
         service = RetrofitClient.getClient().create(ServiceApi.class);
@@ -218,4 +223,33 @@ public class UploadFilesFragment extends Fragment {
         });
     }
 
+
+    // 절대경로 파악할 때 사용된 메소드
+    @Nullable
+    public static String createCopyAndReturnRealPath(@NonNull Context context, @NonNull Uri uri) {
+        final ContentResolver contentResolver = context.getContentResolver();
+        if (contentResolver == null)
+            return null;
+        // 파일 경로를 만듬
+        String filePath = context.getApplicationInfo().dataDir + File.separator
+                + System.currentTimeMillis();
+        File file = new File(filePath);
+        try {
+            // 매개변수로 받은 uri 를 통해  이미지에 필요한 데이터를 불러 들인다.
+            InputStream inputStream = contentResolver.openInputStream(uri);
+            if (inputStream == null)
+                return null;
+            // 이미지 데이터를 다시 내보내면서 file 객체에  만들었던 경로를 이용한다.
+            OutputStream outputStream = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0)
+                outputStream.write(buf, 0, len);
+            outputStream.close();
+            inputStream.close();
+        } catch (IOException ignore) {
+            return null;
+        }
+        return file.getAbsolutePath();
+    }
 }

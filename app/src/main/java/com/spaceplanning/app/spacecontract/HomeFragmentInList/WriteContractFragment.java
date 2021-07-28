@@ -112,7 +112,7 @@ public class WriteContractFragment extends Fragment {
                 String str = null;
                 try {
                     str = "formId=" + URLEncoder.encode(formId, "UTF-8");
-                    contract_viewer.postUrl("http://15.164.0.22:5000/api/eform/preview", str.getBytes());
+                    contract_viewer.postUrl("http://172.16.2.14:3000/api/eform/preview", str.getBytes());
                     contract_viewer.getSettings().setUseWideViewPort(true);
                     contract_viewer.getSettings().setLoadWithOverviewMode(true);
                     contract_viewer.getSettings().setBuiltInZoomControls(true);
